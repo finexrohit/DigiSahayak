@@ -12,6 +12,10 @@
             <h2>Profile</h2>
             <p><strong>Username:</strong> <span id="profileUsername"></span></p>
             <p><strong>Role:</strong> <span id="profileRole"></span></p>
+            <p><strong>Name:</strong> <span id="profileName"></span></p>
+            <p><strong>Gender:</strong> <span id="profileGender"></span></p>
+            <p><strong>Age:</strong> <span id="profileAge"></span></p>
+            <p><strong>Mobile Number:</strong> <span id="profileMobile"></span></p>
             <button id="logoutBtn">Logout</button>
         </div>
         <div id="authSection">
@@ -31,6 +35,19 @@
                 <input type="text" id="newUsername" name="newUsername" required>
                 <label for="newPassword">New Password</label>
                 <input type="password" id="newPassword" name="newPassword" required>
+                <label for="newName">Name</label>
+                <input type="text" id="newName" name="newName" required>
+                <label for="newGender">Gender</label>
+                <select id="newGender" name="newGender" required>
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                <label for="newAge">Age</label>
+                <input type="number" id="newAge" name="newAge" min="0" required>
+                <label for="newMobile">Mobile Number</label>
+                <input type="tel" id="newMobile" name="newMobile" pattern="[0-9]{10}" required>
                 <button type="submit">Create Account</button>
             </form>
             <p id="registerMessage"></p>
