@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digi Sahayak</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="profileSection" style="display:none;">
+            <h2>Profile</h2>
+            <p><strong>Username:</strong> <span id="profileUsername"></span></p>
+            <p><strong>Role:</strong> <span id="profileRole"></span></p>
+            <button id="logoutBtn">Logout</button>
+        </div>
+        <div id="authSection">
+            <h2>Login to Digi Sahayak</h2>
+            <form id="loginForm">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required value="user123">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required value="password123">
+                <button type="submit">Login</button>
+            </form>
+            <p id="loginMessage"></p>
+            <hr>
+            <h3>Create New Account</h3>
+            <form id="registerForm">
+                <label for="newUsername">New Username</label>
+                <input type="text" id="newUsername" name="newUsername" required>
+                <label for="newPassword">New Password</label>
+                <input type="password" id="newPassword" name="newPassword" required>
+                <button type="submit">Create Account</button>
+            </form>
+            <p id="registerMessage"></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
