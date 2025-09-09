@@ -22,15 +22,15 @@
             <h2>Login to Digi Sahayak</h2>
             <form id="loginForm">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username" required value="user123">
+                <input type="text" id="username" name="username" required>
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" required value="password123">
+                <input type="password" id="password" name="password" required>
                 <button type="submit">Login</button>
             </form>
             <p id="loginMessage"></p>
             <hr>
-            <h3>Create New Account</h3>
-            <form id="registerForm">
+            <button id="showRegisterBtn" type="button">Create New Account</button>
+            <form id="registerForm" style="display:none; margin-top: 20px;">
                 <label for="newUsername">New Username</label>
                 <input type="text" id="newUsername" name="newUsername" required>
                 <label for="newPassword">New Password</label>

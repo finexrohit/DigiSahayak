@@ -1,3 +1,10 @@
+// Show registration form when button is clicked
+document.getElementById('showRegisterBtn').addEventListener('click', function() {
+    document.getElementById('registerForm').style.display = 'block';
+    this.style.display = 'none';
+});
+
+// Hide registration form and show button after successful registration
 // Default users for each role
 const defaultUsers = [
     // Owners
@@ -105,5 +112,7 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
         msg.style.color = '#2d6a4f';
         msg.textContent = 'Account created! You can now log in.';
         document.getElementById('registerForm').reset();
+        document.getElementById('registerForm').style.display = 'none';
+        document.getElementById('showRegisterBtn').style.display = 'inline-block';
     }
 });
