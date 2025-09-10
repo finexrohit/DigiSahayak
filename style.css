@@ -1,8 +1,43 @@
+/* Dashboard navigation at bottom left */
+#dashboardNav {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    background: #fff;
+    border-top-right-radius: 12px;
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+    padding: 0 0 12px 0;
+}
+#dashboardNav button {
+    background: #2d6a4f;
+    color: #fff;
+    border: none;
+    padding: 16px 32px 16px 24px;
+    border-radius: 0 12px 12px 0;
+    font-size: 1.1em;
+    cursor: pointer;
+    width: 180px;
+    text-align: left;
+    margin: 0;
+    border-bottom: 1px solid #b7e4c7;
+    transition: background 0.2s;
+}
+#dashboardNav button:last-child {
+    border-bottom: none;
+}
+#dashboardNav button:hover {
+    background: #40916c;
+}
 /* Style for password input wrapper and toggle button */
 .password-wrapper {
     position: relative;
     width: 100%;
-    max-width: 250px;
+    max-width: 400px;
     margin: 0;
     display: flex;
     align-items: center;
@@ -13,8 +48,10 @@
 #loginForm .password-wrapper,
 #registerForm input[type="text"],
 #registerForm .password-wrapper {
-    max-width: 250px;
+    max-width: 400px;
     width: 100%;
+    margin-left: 0;
+    margin-right: 0;
 }
 .password-wrapper input[type="password"],
 .password-wrapper input[type="text"] {
@@ -60,27 +97,32 @@
 }
 #registerForm select, #registerForm input[type="text"], #registerForm input[type="password"], #registerForm input[type="number"], #registerForm input[type="tel"] {
     width: 100%;
-    max-width: 300px;
-    padding: 8px;
+    max-width: 400px;
+    padding: 12px;
     border: 1px solid #b7e4c7;
-    border-radius: 5px;
-    font-size: 1em;
-    margin-bottom: 2px;
+    border-radius: 6px;
+    font-size: 1.1em;
+    margin-bottom: 8px;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 0;
+    margin-right: 0;
 }
 #registerForm button {
-    margin-top: 22px;
+    margin-top: 28px;
     width: 100%;
-    max-width: 300px;
-    text-align: center;
+    max-width: 400px;
+    text-align: left;
+    font-size: 1.1em;
+    padding: 14px;
 }
 /* Center the Create New Account button */
 #showRegisterBtn {
     display: block;
-    margin: 0 auto 20px auto;
+    margin: 0 0 28px 0;
     width: fit-content;
+    text-align: left;
+    font-size: 1.1em;
+    padding: 10px 24px;
 }
 body {
     background: #f0f4f8;
@@ -90,11 +132,12 @@ body {
 }
 .container {
     background: #fff;
-    max-width: 400px;
-    margin: 60px auto;
-    padding: 30px 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    max-width: 600px;
+    margin: 80px auto;
+    padding: 48px 64px;
+    border-radius: 14px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    text-align: left;
 }
 h2, h3 {
     text-align: center;

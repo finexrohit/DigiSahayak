@@ -13,9 +13,20 @@
             <img src="logo.png" alt="Website Logo" id="siteLogo" style="max-width:120px; width:100%; height:auto; display:inline-block;" />
         </div>
         <div id="profileSection" style="display:none;">
+            <div id="dashboardNav" style="display:none;"></div>
             <div id="adminPanel" style="display:none; margin-top:30px;">
                 <h3>Owner Control Panel</h3>
-                <button id="viewAllAccountsBtn">View All Accounts</button>
+                <div style="margin-bottom:10px;">
+                    <label for="accountTypeFilter"><strong>View accounts by type:</strong></label>
+                    <select id="accountTypeFilter">
+                        <option value="all">All</option>
+                        <option value="hospital">Hospital</option>
+                        <option value="doctor">Doctor</option>
+                        <option value="healthcenter">Health Center</option>
+                        <option value="patient">Patient</option>
+                    </select>
+                    <button id="viewAllAccountsBtn">View Accounts</button>
+                </div>
                 <div id="allAccountsData" style="margin-top:20px; display:none;"></div>
             </div>
             <h2>Profile</h2>

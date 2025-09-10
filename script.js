@@ -87,19 +87,39 @@ function showProfile(user) {
     } else {
         document.getElementById('adminPanel').style.display = 'none';
     }
+
+    // Show dashboard navigation for all users
+    const dash = document.getElementById('dashboardNav');
+    dash.innerHTML = `
+        <button id="dashHomeBtn">Home</button>
+        <button id="dashAboutBtn">About Us</button>
+        <button id="dashContactBtn">Contact Us</button>
+    `;
+    dash.style.display = 'flex';
+    // Add click handlers (for demo, just alert)
+    document.getElementById('dashHomeBtn').onclick = () => alert('Home clicked!');
+    document.getElementById('dashAboutBtn').onclick = () => alert('About Us clicked!');
+    document.getElementById('dashContactBtn').onclick = () => alert('Contact Us clicked!');
 }
 // Owner: View all accounts
 if (document.getElementById('viewAllAccountsBtn')) {
     document.getElementById('viewAllAccountsBtn').addEventListener('click', function() {
         const users = getUsers();
+        const filter = document.getElementById('accountTypeFilter').value;
+        let filtered = users;
+        if (filter !== 'all') {
+            filtered = users.filter(u => u.role === filter);
+        }
         let html = '<table style="width:100%;border-collapse:collapse;">';
         html += '<tr style="background:#e9ecef;"><th>Username</th><th>Password</th><th>Role</th><th>Name</th><th>Gender</th><th>Age</th><th>Mobile</th><th>Action</th></tr>';
-        users.forEach((u, idx) => {
-            html += `<tr id="editRow${idx}">
-                <td><input type="text" value="${u.username}" id="editUsername${idx}" style="width:90px;"></td>
-                <td><input type="text" value="${u.password||''}" id="editPassword${idx}" style="width:90px;"></td>
+        filtered.forEach((u, idx) => {
+            // Find the real index in users array for saving
+            const realIdx = users.findIndex(x => x.username === u.username && x.role === u.role);
+            html += `<tr id="editRow${realIdx}">
+                <td><input type="text" value="${u.username}" id="editUsername${realIdx}" style="width:90px;"></td>
+                <td><input type="text" value="${u.password||''}" id="editPassword${realIdx}" style="width:90px;"></td>
                 <td>
-                    <select id="editRole${idx}">
+                    <select id="editRole${realIdx}">
                         <option value="owner" ${u.role==='owner'?'selected':''}>owner</option>
                         <option value="hospital" ${u.role==='hospital'?'selected':''}>hospital</option>
                         <option value="doctor" ${u.role==='doctor'?'selected':''}>doctor</option>
@@ -107,17 +127,17 @@ if (document.getElementById('viewAllAccountsBtn')) {
                         <option value="patient" ${u.role==='patient'?'selected':''}>patient</option>
                     </select>
                 </td>
-                <td><input type="text" value="${u.name||''}" id="editName${idx}" style="width:90px;"></td>
+                <td><input type="text" value="${u.name||''}" id="editName${realIdx}" style="width:90px;"></td>
                 <td>
-                    <select id="editGender${idx}">
+                    <select id="editGender${realIdx}">
                         <option value="Male" ${u.gender==='Male'?'selected':''}>Male</option>
                         <option value="Female" ${u.gender==='Female'?'selected':''}>Female</option>
                         <option value="Other" ${u.gender==='Other'?'selected':''}>Other</option>
                     </select>
                 </td>
-                <td><input type="number" value="${u.age||''}" id="editAge${idx}" style="width:60px;"></td>
-                <td><input type="text" value="${u.mobile||''}" id="editMobile${idx}" style="width:100px;"></td>
-                <td><button onclick="saveEdit(${idx})">Save</button></td>
+                <td><input type="number" value="${u.age||''}" id="editAge${realIdx}" style="width:60px;"></td>
+                <td><input type="text" value="${u.mobile||''}" id="editMobile${realIdx}" style="width:100px;"></td>
+                <td><button onclick="saveEdit(${realIdx})">Save</button></td>
             </tr>`;
         });
         html += '</table>';
@@ -146,6 +166,7 @@ function logout() {
     document.getElementById('authSection').style.display = 'block';
     document.getElementById('loginForm').reset();
     document.getElementById('loginMessage').textContent = '';
+    document.getElementById('dashboardNav').style.display = 'none';
 }
 
 document.getElementById('loginForm').addEventListener('submit', function(e) {
