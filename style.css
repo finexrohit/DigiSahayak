@@ -1,3 +1,81 @@
+/* Style for password input wrapper and toggle button */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 250px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Match password input width to username input */
+#loginForm input[type="text"],
+#loginForm .password-wrapper,
+#registerForm input[type="text"],
+#registerForm .password-wrapper {
+    max-width: 250px;
+    width: 100%;
+}
+.password-wrapper input[type="password"],
+.password-wrapper input[type="text"] {
+    width: 100%;
+    padding-right: 38px;
+    box-sizing: border-box;
+}
+.password-toggle-btn {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1em;
+    padding: 0 4px;
+    color: #2d6a4f;
+    height: 28px;
+    display: flex;
+    align-items: center;
+}
+#siteLogo {
+    margin-bottom: 10px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+#registerForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    margin-top: 20px;
+}
+#registerForm label {
+    width: 100%;
+    max-width: 300px;
+    text-align: left;
+    margin-top: 18px;
+    margin-bottom: 4px;
+    font-weight: bold;
+    align-self: flex-start;
+}
+#registerForm select, #registerForm input[type="text"], #registerForm input[type="password"], #registerForm input[type="number"], #registerForm input[type="tel"] {
+    width: 100%;
+    max-width: 300px;
+    padding: 8px;
+    border: 1px solid #b7e4c7;
+    border-radius: 5px;
+    font-size: 1em;
+    margin-bottom: 2px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+#registerForm button {
+    margin-top: 22px;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+}
 /* Center the Create New Account button */
 #showRegisterBtn {
     display: block;

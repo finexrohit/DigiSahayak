@@ -1,3 +1,26 @@
+// Show/hide password for login
+document.getElementById('toggleLoginPassword').addEventListener('click', function() {
+    const pwd = document.getElementById('password');
+    if (pwd.type === 'password') {
+        pwd.type = 'text';
+        this.textContent = '🙈';
+    } else {
+        pwd.type = 'password';
+        this.textContent = '👁️';
+    }
+});
+
+// Show/hide password for registration
+document.getElementById('toggleRegisterPassword').addEventListener('click', function() {
+    const pwd = document.getElementById('newPassword');
+    if (pwd.type === 'password') {
+        pwd.type = 'text';
+        this.textContent = '🙈';
+    } else {
+        pwd.type = 'password';
+        this.textContent = '👁️';
+    }
+});
 // Show registration form when button is clicked
 document.getElementById('showRegisterBtn').addEventListener('click', function() {
     document.getElementById('registerForm').style.display = 'block';
@@ -58,6 +81,64 @@ function showProfile(user) {
     document.getElementById('profileGender').textContent = user.gender || '';
     document.getElementById('profileAge').textContent = user.age || '';
     document.getElementById('profileMobile').textContent = user.mobile || '';
+    // Show admin panel for owner
+    if (user.role === 'owner') {
+        document.getElementById('adminPanel').style.display = 'block';
+    } else {
+        document.getElementById('adminPanel').style.display = 'none';
+    }
+}
+// Owner: View all accounts
+if (document.getElementById('viewAllAccountsBtn')) {
+    document.getElementById('viewAllAccountsBtn').addEventListener('click', function() {
+        const users = getUsers();
+        let html = '<table style="width:100%;border-collapse:collapse;">';
+        html += '<tr style="background:#e9ecef;"><th>Username</th><th>Password</th><th>Role</th><th>Name</th><th>Gender</th><th>Age</th><th>Mobile</th><th>Action</th></tr>';
+        users.forEach((u, idx) => {
+            html += `<tr id="editRow${idx}">
+                <td><input type="text" value="${u.username}" id="editUsername${idx}" style="width:90px;"></td>
+                <td><input type="text" value="${u.password||''}" id="editPassword${idx}" style="width:90px;"></td>
+                <td>
+                    <select id="editRole${idx}">
+                        <option value="owner" ${u.role==='owner'?'selected':''}>owner</option>
+                        <option value="hospital" ${u.role==='hospital'?'selected':''}>hospital</option>
+                        <option value="doctor" ${u.role==='doctor'?'selected':''}>doctor</option>
+                        <option value="healthcenter" ${u.role==='healthcenter'?'selected':''}>healthcenter</option>
+                        <option value="patient" ${u.role==='patient'?'selected':''}>patient</option>
+                    </select>
+                </td>
+                <td><input type="text" value="${u.name||''}" id="editName${idx}" style="width:90px;"></td>
+                <td>
+                    <select id="editGender${idx}">
+                        <option value="Male" ${u.gender==='Male'?'selected':''}>Male</option>
+                        <option value="Female" ${u.gender==='Female'?'selected':''}>Female</option>
+                        <option value="Other" ${u.gender==='Other'?'selected':''}>Other</option>
+                    </select>
+                </td>
+                <td><input type="number" value="${u.age||''}" id="editAge${idx}" style="width:60px;"></td>
+                <td><input type="text" value="${u.mobile||''}" id="editMobile${idx}" style="width:100px;"></td>
+                <td><button onclick="saveEdit(${idx})">Save</button></td>
+            </tr>`;
+        });
+        html += '</table>';
+        const dataDiv = document.getElementById('allAccountsData');
+        dataDiv.innerHTML = html;
+        dataDiv.style.display = 'block';
+        // Attach saveEdit to window so it can be called from inline onclick
+        window.saveEdit = function(idx) {
+            const users = getUsers();
+            const u = users[idx];
+            u.username = document.getElementById('editUsername'+idx).value;
+            u.password = document.getElementById('editPassword'+idx).value;
+            u.role = document.getElementById('editRole'+idx).value;
+            u.name = document.getElementById('editName'+idx).value;
+            u.gender = document.getElementById('editGender'+idx).value;
+            u.age = document.getElementById('editAge'+idx).value;
+            u.mobile = document.getElementById('editMobile'+idx).value;
+            setUsers(users);
+            alert('Account updated!');
+        }
+    });
 }
 
 function logout() {
@@ -92,6 +173,7 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
     const newGender = document.getElementById('newGender').value;
     const newAge = document.getElementById('newAge').value;
     const newMobile = document.getElementById('newMobile').value;
+    const newRole = document.getElementById('newRole').value;
     let users = getUsers();
     const exists = users.some(u => u.username === newUsername);
     const msg = document.getElementById('registerMessage');
@@ -102,7 +184,7 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
         users.push({
             username: newUsername,
             password: newPassword,
-            role: 'patient',
+            role: newRole,
             name: newName,
             gender: newGender,
             age: newAge,
